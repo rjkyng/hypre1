@@ -34,7 +34,8 @@ HEADERS =\
  mpistubs.h\
  threading.h\
  timing.h\
- _hypre_utilities.h
+ _hypre_utilities.h\
+ lap_utils.h
 
 FILES =\
  HYPRE_version.c\
@@ -62,7 +63,8 @@ FILES =\
  gpuErrorCheck.c\
  gpuMem.c\
  hypre_general.c\
- hypre_reducesum.c
+ hypre_reducesum.c\
+ lap_utils.c
 
 OBJS = ${FILES:.c=.o}
 
@@ -77,12 +79,16 @@ all: libHYPRE_utilities${HYPRE_LIB_SUFFIX}
 	cp -fR $(srcdir)/_hypre_utilities.h $(HYPRE_BUILD_DIR)/include
 	cp -fR $(srcdir)/hypre_hopscotch_hash.h $(HYPRE_BUILD_DIR)/include
 	cp -fR $(srcdir)/fortran*.h $(HYPRE_BUILD_DIR)/include
+	cp -fR $(srcdir)/lap_utils.h $(HYPRE_INC_INSTALL)
+	# RK 2019 (lap_utils)
 #	cp -fR libHYPRE* $(HYPRE_BUILD_DIR)/lib
 
 install: libHYPRE_utilities${HYPRE_LIB_SUFFIX}
 	cp -fR $(srcdir)/HYPRE_*.h $(HYPRE_INC_INSTALL)
 	cp -fR $(srcdir)/_hypre_utilities.h $(HYPRE_INC_INSTALL)
 	cp -fR $(srcdir)/fortran*.h $(HYPRE_INC_INSTALL)
+	cp -fR $(srcdir)/lap_utils.h $(HYPRE_INC_INSTALL)
+	# RK 2019 (lap_utils)
 #	cp -fR libHYPRE* $(HYPRE_LIB_INSTALL)
 
 clean:

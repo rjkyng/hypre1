@@ -139,6 +139,10 @@ distclean: clean
 ##################################################################
 
 # C
+# RK 2019
+ij_print: ij_print.o
+	@echo  "Building" $@ "... "
+	${LINK_CC} -o $@ $@.o ${LFLAGS}
 
 ij: ij.o
 	@echo  "Building" $@ "... "

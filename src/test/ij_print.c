@@ -21,6 +21,8 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "lap_utils.h"
+
 #include "_hypre_utilities.h"
 #include "HYPRE.h"
 #include "HYPRE_parcsr_mv.h"
@@ -298,6 +300,7 @@ main( hypre_int argc,
    HYPRE_Real   agg_P12_trunc_factor  = 0; /* default value */
 
    HYPRE_Int      print_system = 0;
+   HYPRE_Int      print_stats = 0;
 
    HYPRE_Int rel_change = 0;
    /* begin lobpcg */
@@ -1483,6 +1486,12 @@ main( hypre_int argc,
       {
          arg_index++;
          print_system = 1;
+      }
+      /* RK 2019 */
+      else if ( strcmp(argv[arg_index], "-printstats") == 0 )
+      {
+         arg_index++;
+         print_stats = 1;
       }
       /* BM Oct 23, 2006 */
       else if ( strcmp(argv[arg_index], "-plot_grids") == 0 )
@@ -3682,9 +3691,12 @@ main( hypre_int argc,
       if (myid == 0)
       {
          hypre_printf("\n");
-         hypre_printf("Iterations = %d\n", num_iterations);
+         hypre_printf("Iterations = %d\n", num_iterations); /* RK this is what we run by default */
          hypre_printf("Final Relative Residual Norm = %e\n", final_res_norm);
          hypre_printf("\n");
+
+         /* RK 2019 */
+         hypre_GetTiming("TODO stuff stuff", hypre_MPI_COMM_WORLD);
       }
 
    }
@@ -6450,6 +6462,11 @@ main( hypre_int argc,
    /* RDF: Why is this here? */
    /*if (!(build_rhs_type ==1 || build_rhs_type ==7))
       HYPRE_IJVectorGetObjectType(ij_b, &j);*/
+
+   if (print_system)
+   {
+      HYPRE_IJVectorPrint(ij_x, "IJ.out.x");
+   }
 
    if (print_system)
    {
