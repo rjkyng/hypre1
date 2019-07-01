@@ -3613,7 +3613,8 @@ main( hypre_int argc,
       HYPRE_PCGSetup(pcg_solver, (HYPRE_Matrix)parcsr_A,
                      (HYPRE_Vector)b, (HYPRE_Vector)x);
       hypre_EndTiming(time_index);
-      hypre_PrintTiming("Setup phase times", hypre_MPI_COMM_WORLD);
+      // hypre_PrintTiming("Setup phase times", hypre_MPI_COMM_WORLD); /* RK TODO */
+      hypre_GetTiming("Setup phase times","setup.timing.out.log", hypre_MPI_COMM_WORLD); /* RK TODO */
       hypre_FinalizeTiming(time_index);
       hypre_ClearTiming();
 
@@ -3624,7 +3625,9 @@ main( hypre_int argc,
                      (HYPRE_Vector)b, (HYPRE_Vector)x);
 
       hypre_EndTiming(time_index);
-      hypre_PrintTiming("Solve phase times", hypre_MPI_COMM_WORLD);
+      // hypre_PrintTiming("Solve phase times", hypre_MPI_COMM_WORLD); /* RK TODO */
+      hypre_GetTiming("Solve phase times","Solve.timing.out.log", hypre_MPI_COMM_WORLD); /* RK TODO */
+
       hypre_FinalizeTiming(time_index);
       hypre_ClearTiming();
 
@@ -3691,12 +3694,9 @@ main( hypre_int argc,
       if (myid == 0)
       {
          hypre_printf("\n");
-         hypre_printf("Iterations = %d\n", num_iterations); /* RK this is what we run by default */
+         hypre_printf("Iterations = %d\n", num_iterations); /* RK 2019 this is what we run by default  ? */
          hypre_printf("Final Relative Residual Norm = %e\n", final_res_norm);
          hypre_printf("\n");
-
-         /* RK 2019 */
-         hypre_GetTiming("TODO stuff stuff", hypre_MPI_COMM_WORLD);
       }
 
    }
