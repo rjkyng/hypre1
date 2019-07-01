@@ -3614,7 +3614,7 @@ main( hypre_int argc,
                      (HYPRE_Vector)b, (HYPRE_Vector)x);
       hypre_EndTiming(time_index);
       // hypre_PrintTiming("Setup phase times", hypre_MPI_COMM_WORLD); /* RK TODO */
-      hypre_GetTiming("Setup phase times","setup.timing.out.log", hypre_MPI_COMM_WORLD); /* RK TODO */
+      hypre_GetTiming("Setup phase times","setup.timing.out", hypre_MPI_COMM_WORLD); /* RK TODO */
       hypre_FinalizeTiming(time_index);
       hypre_ClearTiming();
 
@@ -3626,7 +3626,7 @@ main( hypre_int argc,
 
       hypre_EndTiming(time_index);
       // hypre_PrintTiming("Solve phase times", hypre_MPI_COMM_WORLD); /* RK TODO */
-      hypre_GetTiming("Solve phase times","Solve.timing.out.log", hypre_MPI_COMM_WORLD); /* RK TODO */
+      hypre_GetTiming("Solve phase times","solve.timing.out", hypre_MPI_COMM_WORLD); /* RK TODO */
 
       hypre_FinalizeTiming(time_index);
       hypre_ClearTiming();
