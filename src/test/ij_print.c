@@ -3697,6 +3697,9 @@ main( hypre_int argc,
          hypre_printf("Iterations = %d\n", num_iterations); /* RK 2019 this is what we run by default  ? */
          hypre_printf("Final Relative Residual Norm = %e\n", final_res_norm);
          hypre_printf("\n");
+
+         hypre_PrintRealToFile("Final Relative Residual Norm", "relres.out", final_res_norm,
+                hypre_MPI_COMM_WORLD);
       }
 
    }

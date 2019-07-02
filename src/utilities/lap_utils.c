@@ -1,5 +1,5 @@
 #define HYPRE_TIMING
-/* git c
+/* 
 we have to define HYPRE_TIMING
 to ensure the right defs are made available by headers
 
@@ -55,7 +55,7 @@ hypre_GetTiming(const char *heading, const char *filename,
    {
       hypre_printf("=============================================\n");
       hypre_printf("%s:\n", heading);
-      hypre_printf("writing timing info to file %s:\n", heading);
+      hypre_printf("writing timing info to file %s:\n", filename);
       hypre_printf("=============================================\n");
    }
 
@@ -106,4 +106,42 @@ hypre_GetTiming(const char *heading, const char *filename,
    }
 
    return ierr;
+}
+
+
+HYPRE_Int
+hypre_PrintRealToFile(const char *heading, const char *filename, HYPRE_Real datum,
+                MPI_Comm comm)
+{
+   HYPRE_Int  ierr = 0;
+   HYPRE_Int     myrank;
+
+   FILE           *file;
+
+   hypre_MPI_Comm_rank(comm, &myrank );
+
+   /* print heading */
+   if (myrank == 0)
+   {
+      hypre_printf("=============================================\n");
+      hypre_printf("%s:\n", heading);
+      hypre_printf("writing datum to file %s:\n", filename);
+      hypre_printf("value : %f\n", datum);
+      hypre_printf("=============================================\n");
+
+      if ((file = fopen(filename, "w")) == NULL)
+      {
+         hypre_error(1);
+         return hypre_error_flag; /* TODOLOW: I don't know if this makes sense at all*/
+      }
+      hypre_fprintf(file, "%f\n", datum);
+
+      fclose(file);
+
+      return ierr;
+   } else {
+      /* should only be called w myrank == 0 proc */
+      hypre_error(1);
+      return hypre_error_flag; /* TODOLOW: I don't know if this makes sense at all*/
+   }
 }

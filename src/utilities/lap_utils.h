@@ -22,3 +22,7 @@ typedef struct
 
 /* lap_utils.c */
 HYPRE_Int hypre_GetTiming( const char *heading , const char *filename, MPI_Comm comm );
+
+HYPRE_Int
+hypre_PrintRealToFile(const char *heading, const char *filename, HYPRE_Real datum,
+                MPI_Comm comm);
