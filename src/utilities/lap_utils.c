@@ -100,7 +100,7 @@ hypre_GetTiming(const char *heading, const char *filename,
          hypre_error_in_arg(2);
          return hypre_error_flag; /* TODOLOW: I don't know if this makes sense at all*/
       }
-      hypre_fprintf(file, "%f\n", wall_time);
+      hypre_fprintf(file, "%e\n", wall_time);
 
       fclose(file);
    }
@@ -126,7 +126,7 @@ hypre_PrintRealToFile(const char *heading, const char *filename, HYPRE_Real datu
       hypre_printf("=============================================\n");
       hypre_printf("%s:\n", heading);
       hypre_printf("writing datum to file %s:\n", filename);
-      hypre_printf("value : %f\n", datum);
+      hypre_printf("value : %e\n", datum);
       hypre_printf("=============================================\n");
 
       if ((file = fopen(filename, "w")) == NULL)
@@ -134,7 +134,7 @@ hypre_PrintRealToFile(const char *heading, const char *filename, HYPRE_Real datu
          hypre_error(1);
          return hypre_error_flag; /* TODOLOW: I don't know if this makes sense at all*/
       }
-      hypre_fprintf(file, "%f\n", datum);
+      hypre_fprintf(file, "%e\n", datum);
 
       fclose(file);
 
