@@ -3632,6 +3632,9 @@ main( hypre_int argc,
       hypre_ClearTiming();
 
       HYPRE_PCGGetNumIterations(pcg_solver, &num_iterations);
+      hypre_PrintRealToFile("PCG iterations", "pcgiter.out",num_iterations, hypre_MPI_COMM_WORLD);
+      
+
       HYPRE_PCGGetFinalRelativeResidualNorm(pcg_solver, &final_res_norm);
 
 #if SECOND_TIME
