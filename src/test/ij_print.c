@@ -3631,6 +3631,7 @@ main( hypre_int argc,
       hypre_FinalizeTiming(time_index);
       hypre_ClearTiming();
 
+      //iter counter
       HYPRE_PCGGetNumIterations(pcg_solver, &num_iterations);
       hypre_PrintRealToFile("PCG iterations", "pcgiter.out",num_iterations, hypre_MPI_COMM_WORLD);
       
